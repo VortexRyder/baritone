@@ -66,7 +66,7 @@ public class GuiClick extends GuiScreen {
         int mx = Mouse.getX();
         int my = Mouse.getY();
         Vec3d near = toWorld(mx, my, 0);
-        Vec3d far = toWorld(mx, my, 1); // "Use 0.945 that's what stack overflow says" - leijurv
+        Vec3d far = toWorld(mx, my, 1);
         if (near != null && far != null) {
             Vec3d viewerPos = new Vec3d(mc.getRenderManager().viewerPosX, mc.getRenderManager().viewerPosY, mc.getRenderManager().viewerPosZ);
             RayTraceResult result = mc.world.rayTraceBlocks(near.add(viewerPos), far.add(viewerPos), false, false, true);
