@@ -76,7 +76,7 @@ public final class PathRenderer implements IRenderer {
         }
 
         if (goal != null && settings.renderGoal.value) {
-            drawDankLitGoalBox(renderView, goal, partialTicks, settings.colorGoalBox.value);
+            drawGoal(renderView, goal, partialTicks, settings.colorGoalBox.value);
         }
 
         if (!settings.renderPath.value) {
@@ -165,13 +165,13 @@ public final class PathRenderer implements IRenderer {
         double vpX = renderManager.viewerPosX;
         double vpY = renderManager.viewerPosY;
         double vpZ = renderManager.viewerPosZ;
-        boolean renderPathAsFrickinThingy = !settings.renderPathAsLine.value;
+        boolean renderAsLine = !settings.renderPathAsLine.value;
 
-        buffer.begin(renderPathAsFrickinThingy ? GL_LINE_STRIP : GL_LINES, DefaultVertexFormats.POSITION);
+        buffer.begin(renderAsLine ? GL_LINE_STRIP : GL_LINES, DefaultVertexFormats.POSITION);
         buffer.pos(x1 + 0.5D - vpX, y1 + 0.5D - vpY, z1 + 0.5D - vpZ).endVertex();
         buffer.pos(x2 + 0.5D - vpX, y2 + 0.5D - vpY, z2 + 0.5D - vpZ).endVertex();
 
-        if (renderPathAsFrickinThingy) {
+        if (renderAsLine) {
             buffer.pos(x2 + 0.5D - vpX, y2 + 0.53D - vpY, z2 + 0.5D - vpZ).endVertex();
             buffer.pos(x1 + 0.5D - vpX, y1 + 0.53D - vpY, z1 + 0.5D - vpZ).endVertex();
             buffer.pos(x1 + 0.5D - vpX, y1 + 0.5D - vpY, z1 + 0.5D - vpZ).endVertex();
@@ -200,9 +200,9 @@ public final class PathRenderer implements IRenderer {
         IRenderer.endLines(settings.renderSelectionBoxesIgnoreDepth.value);
     }
 
-    public static void drawDankLitGoalBox(Entity player, Goal goal, float partialTicks, Color color) {
+    public static void drawGoal(Entity player, Goal goal, float partialTicks, Color color) {
         double renderPosX = renderManager.viewerPosX;
-        double renderPosY = renderManager.viewerPosY;
+        double renderPosY = renderMa    nager.viewerPosY;
         double renderPosZ = renderManager.viewerPosZ;
         double minX, maxX;
         double minZ, maxZ;
@@ -276,11 +276,11 @@ public final class PathRenderer implements IRenderer {
             maxY = 256 - renderPosY;
         } else if (goal instanceof GoalComposite) {
             for (Goal g : ((GoalComposite) goal).goals()) {
-                drawDankLitGoalBox(player, g, partialTicks, color);
+                drawGoal(player, g, partialTicks, color);
             }
             return;
         } else if (goal instanceof GoalInverted) {
-            drawDankLitGoalBox(player, ((GoalInverted) goal).origin, partialTicks, settings.colorInvertedGoalBox.value);
+            drawGoal(player, ((GoalInverted) goal).origin, partialTicks, settings.colorInvertedGoalBox.value);
             return;
         } else if (goal instanceof GoalYLevel) {
             GoalYLevel goalpos = (GoalYLevel) goal;

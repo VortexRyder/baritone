@@ -188,6 +188,14 @@ public final class Settings {
     ));
 
     /**
+     * Blocks that Bettertone will scan for while in ironman mode
+     */
+
+    public final Setting<List<Block>> blocksToScan = new Setting<>(new ArrayList<>(
+            // Leave Empty by Default
+    ));
+
+    /**
      * Blocks that Baritone is not allowed to break
      */
     public final Setting<List<Block>> blocksToAvoidBreaking = new Setting<>(new ArrayList<>(Arrays.asList( // TODO can this be a HashSet or ImmutableSet?
